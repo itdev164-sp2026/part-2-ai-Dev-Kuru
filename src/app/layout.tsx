@@ -3,6 +3,7 @@ import { Inter, Geist } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppSidebar } from "@/components/app-sidebar";
 import { DashboardTopbar } from "@/components/dashboard-topbar";
+import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "./globals.css";
@@ -42,7 +43,9 @@ export default function RootLayout({
             <SidebarProvider>
               <AppSidebar />
               <SidebarInset>
-                <DashboardTopbar />
+                <DashboardTopbar>
+                  <BreadcrumbNav />
+                </DashboardTopbar>
                 <div className="flex-1 px-4 py-6 md:px-6 lg:px-8">
                   <div className="mx-auto w-full max-w-5xl">{children}</div>
                 </div>

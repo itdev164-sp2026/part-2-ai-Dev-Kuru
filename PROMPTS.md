@@ -41,3 +41,43 @@ I feel like using an AI assistant makes me more productive and makes the coding
 "Cleaner" for lack of a better word. from my brief experience with the agent (not copilot)
 i find it does whats asked of it as long as the prompt is clear.
 
+
+
+## Activity 2: Building the Dashboard Shell
+
+### Prompt 1
+
+**What I asked:**
+
+> Using the shadcn sidebar components that are now in my src/components/ui/ folder,
+create a professional, collapsible dashboard layout. It should include:
+
+1. A sidebar (src/components/app-sidebar.tsx) with navigation links for:
+   - Overview (use the Home icon from lucide-react)
+   - Projects (use the FolderOpen icon)
+   - Settings (use the Settings icon)
+
+2. A top navigation area with breadcrumbs showing the current page.
+
+3. A main content area that wraps the existing page content.
+
+4. Update src/app/layout.tsx to use the new SidebarProvider and sidebar layout.
+
+Important: Preserve the Developer Profile content from Activity 1 in
+src/app/page.tsx — it should appear in the main content area of the new layout.
+Keep the dark mode toggle working.
+
+**What happened:**
+
+> the agent added app-sidebar.tsx with the Overview, Projects, and Settings navigation, dashboard-topbar.tsx for route-aware breadcrumbs and the theme toggle. It also added placeholder pages for page.tsx and page.tsx 
+
+> app-sidebar.tsx was implemented correctly, modifying layout.tsx as expected without any need for intervention
+
+### Reflection
+
+> Did the Agent accidentally delete or overwrite any of your Activity 1
+> code? If so, how did you recover? (Copilot Edits has an "Undo" /
+> "Revert" button — did you use it?) What did you learn about giving
+> the Agent context about existing code you want to preserve?
+
+> during this activity the agent did not accidentally delete= or overwrite any information it was not asked to from activity one, i did not need to use any recover features as a resualt. i have noticed that as long as prompts are descriptive and full of context the AI preserves most content.
