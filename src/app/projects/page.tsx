@@ -1,5 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { supabase } from "@/lib/supabase"
+import Link from "next/link"
 
 type ProjectRecord = {
   id: string | number
@@ -32,11 +34,16 @@ export default async function ProjectsPage() {
   if (error) {
     return (
       <section className="space-y-6">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-          <p className="max-w-2xl text-muted-foreground">
-            Live project records from Supabase appear here.
-          </p>
+        <div className="flex items-center justify-between gap-4">
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+            <p className="max-w-2xl text-muted-foreground">
+              Live project records from Supabase appear here.
+            </p>
+          </div>
+          <Link href="/projects/new">
+            <Button className="whitespace-nowrap">New Project</Button>
+          </Link>
         </div>
 
         <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-6 text-sm text-destructive">
@@ -48,11 +55,16 @@ export default async function ProjectsPage() {
 
   return (
     <section className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-        <p className="max-w-2xl text-muted-foreground">
-          A current view of all project records stored in Supabase.
-        </p>
+      <div className="flex items-center justify-between gap-4">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
+          <p className="max-w-2xl text-muted-foreground">
+            A current view of all project records stored in Supabase.
+          </p>
+        </div>
+        <Link href="/projects/new">
+          <Button className="whitespace-nowrap">New Project</Button>
+        </Link>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

@@ -6,6 +6,7 @@ import { DashboardTopbar } from "@/components/dashboard-topbar";
 import { BreadcrumbNav } from "@/components/breadcrumb-nav";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -51,6 +52,7 @@ export default function RootLayout({
                 </div>
               </SidebarInset>
             </SidebarProvider>
+            <Toaster />
           </TooltipProvider>
         </ThemeProvider>
       </body>
