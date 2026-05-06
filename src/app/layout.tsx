@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Geist } from "next/font/google";
+import { createSupabaseServerClient } from "@/lib/supabase";
 import { ThemeProvider } from "@/components/theme-provider";
 import { AppSidebar } from "@/components/app-sidebar";
 import { DashboardTopbar } from "@/components/dashboard-topbar";
@@ -22,11 +23,16 @@ export const metadata: Metadata = {
   description: "AI-native web development with Next.js, Tailwind, and Supabase",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html
       lang="en"
@@ -42,7 +48,7 @@ export default function RootLayout({
         >
           <TooltipProvider delayDuration={0}>
             <SidebarProvider>
-              <AppSidebar />
+              <AppSidebar user={user} />
               <SidebarInset>
                 <DashboardTopbar>
                   <BreadcrumbNav />
