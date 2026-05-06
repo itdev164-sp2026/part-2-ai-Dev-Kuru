@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FolderOpen, Home, Settings, BookOpen } from "lucide-react";
+import { FolderOpen, Home, Settings, BookOpen, LogOut } from "lucide-react";
+import type { User } from "@supabase/supabase-js";
 
 import {
   Sidebar,
@@ -17,7 +18,9 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { signOut } from "@/app/actions";
 
 const navigationItems = [
   { title: "Overview", href: "/", icon: Home },
@@ -33,7 +36,7 @@ function isActivePath(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function AppSidebar() {
+export function AppSidebar({ user }: { user: User | null }) {
   const pathname = usePathname();
 
   return (
@@ -81,9 +84,33 @@ export function AppSidebar() {
       <SidebarSeparator />
 
       <SidebarFooter>
-        <div className="rounded-xl border border-border/60 bg-card/80 px-3 py-3 text-xs text-muted-foreground shadow-sm backdrop-blur">
-          Collapse the rail for a compact workspace.
-        </div>
+        {user ? (
+          <div className="space-y-3">
+            <div className="rounded-xl border border-border/60 bg-card/80 px-3 py-3 shadow-sm backdrop-blur">
+              <p className="truncate text-xs font-medium text-foreground">
+                {user.email}
+              </p>
+              <p className="truncate text-xs text-muted-foreground">
+                Signed in
+              </p>
+            </div>
+            <form action={signOut} className="w-full">
+              <Button
+                type="submit"
+                variant="outline"
+                className="w-full justify-start gap-2"
+                size="sm"
+              >
+                <LogOut className="size-4" />
+                <span>Sign Out</span>
+              </Button>
+            </form>
+          </div>
+        ) : (
+          <div className="rounded-xl border border-border/60 bg-card/80 px-3 py-3 text-xs text-muted-foreground shadow-sm backdrop-blur">
+            Collapse the rail for a compact workspace.
+          </div>
+        )}
       </SidebarFooter>
     </Sidebar>
   );

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { supabase } from "@/lib/supabase"
+import { createSupabaseServerClient } from "@/lib/supabase"
 import Link from "next/link"
 
 type ProjectRecord = {
@@ -24,6 +24,8 @@ function getStatusStyles(status: string | null) {
 }
 
 export default async function ProjectsPage() {
+  const supabase = await createSupabaseServerClient()
+
   const { data, error } = await supabase
     .from("projects")
     .select("id, title, description, status")

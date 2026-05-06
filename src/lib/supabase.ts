@@ -1,6 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
+// For Server Components and Server Actions, use the SSR client
+export { createSupabaseServerClient } from "@/lib/supabase/server";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
+// For Middleware
+export { createSupabaseMiddlewareClient } from "@/lib/supabase/middleware";
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// For Client Components
+export { createSupabaseBrowserClient } from "@/lib/supabase/client";
