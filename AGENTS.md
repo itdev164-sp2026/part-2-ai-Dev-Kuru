@@ -95,3 +95,60 @@ to display the correct page name
 > noticed? Did anything surprise you about how simple server-side
 it feels a lot more smoother with there not being a need to reset the server to update
 information on the page.
+
+## Activity 5: Securing the App with Supabase Auth
+
+### Prompt 1
+
+**What I asked:**
+
+> Implement a complete email/password authentication flow for this Next.js 15
+App Router project using @supabase/ssr. Here is what I need:
+
+1. SUPABASE CLIENTS: Create server-side Supabase client utilities in
+   src/lib/supabase/ that work correctly with Next.js cookies. I need
+   separate clients for Server Components, Server Actions, and Middleware.
+
+2. LOGIN PAGE: Create a page at src/app/(auth)/login/page.tsx with a
+   shadcn/ui card-based login form. It should support both "Sign In"
+   and "Sign Up" (toggle between them or use tabs). Handle the auth
+   via Server Actions, not client-side fetch.
+
+3. MIDDLEWARE: Create a middleware.ts file at src/middleware.ts (next to
+   the app directory — Next.js looks for middleware as a sibling of app)
+   that:
+   - Refreshes the user's auth session on every request
+   - Protects the /projects routes — redirect unauthenticated users to /login
+   - Allows unauthenticated access to /login
+   - Uses supabase.auth.getUser() (NOT getSession()) for verification
+
+4. SIGN OUT: Add a "Sign Out" button to the existing sidebar component
+   (src/components/app-sidebar.tsx) that calls a Server Action to sign
+   the user out and redirect to /login. The button must only render
+   when an authenticated user is present — pass the user as a prop from
+   the root layout (which will need to fetch it via the server Supabase
+   client) and gate the Sign Out UI on that prop.
+
+5. UPDATE DATA QUERIES: Modify the projects page and the create-project
+   Server Action to use the authenticated Supabase client so that RLS
+   policies filter data per user.
+
+Use @workspace to understand the existing project structure. Do not remove
+or break existing functionality — integrate auth around it.
+
+
+**What happened:**
+
+> the agent modified around 11 files handling middleware,login,sign out and data scroping. the agent also reviewed the functionality of its changes comfirming that everything worked in one single pass.
+
+### Reflection
+
+> How did the Agent handle the creation of middleware.ts? Did you have to manually add files to the Working Set for context? What surprised.
+the agent used read_file and grep_search to discover the existing structure automatically. The workspace info showed it the folder layout, along with my request about where to place it 
+
+> you about how many files needed to change to add authentication?
+around 11(including files it reviewd)
+
+> How does middleware-based auth compare to checking login status inside each page component?
+
+its a lot more secure and seems like it would be more "scalable" compared to basic login status components.
